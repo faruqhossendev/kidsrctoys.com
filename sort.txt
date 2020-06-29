@@ -1,0 +1,170 @@
+import fetch from 'node-fetch'
+import React,{ useState, useEffect } from 'react';
+import Axios from 'axios';
+import Link from 'next/link';
+import Layout from '../../components/Layout';
+
+const Product = ({ allcatagory, catagorypost }) => {
+    // console.log('catagory ', allcatagory)
+    const [sortPost, setSortpost] = useState(catagorypost)
+    const [sortedpost, setSortedpost] = useState([])
+    const [sortby, setSortby] = useState('');
+
+    useEffect(() => {
+
+        setSortpost(allcatagory)
+
+    }, [])
+    useEffect(() => {
+        const sortData = sortPost.sort((a, b) => {
+            if (sortby == 'high') {
+                return a.acf.price - b.acf.price
+            }
+            if (sortby == 'low') {
+                return b.acf.price - a.acf.price
+            }
+        })
+        setSortedpost(sortData)
+
+    }, [sortby])
+
+    const sortHandaler = (e)=>{
+        setSortby(e.target.value)
+    }
+
+    console.log('sort value', sortby)
+    console.log('sort data', sortedpost)
+
+
+
+    return (
+        <Layout>
+            <div className='container'>
+                <div className="row">
+                    <div className="col-md-3 border-right">
+                        <ul className="list-group list-group-flush hover-color">
+                            {
+                                allcatagory.map((catagory) => {
+                                    return (
+                                        <li key={catagory.id} className='list-group-item list-group-item-action'>
+                                            <Link href='/products/[slug]' as={`/products/${catagory.slug}`} ><a className='text-decoration-none font-weight-bold text-secondary'>{catagory.name}</a></Link>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                    <div className="col-md-9">
+                        <div className="row">
+                            <div className="col py-0 mr-0">
+                                <div className="form-group row m-0">
+                                    <label htmlFor="filterfor" className="col-sm-9 col-form-label text-right py-0">Sort By</label>
+                                    <div className="col-sm-3 p-0">
+                                        <select onChange={sortHandaler} name='sort' className="form-control form-control-sm border-top-0" id='filterfor'>
+                                            <option value=''>Sort</option>
+                                            <option value='low'>Low to High</option>
+                                            <option value='high'>High to Low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* <hr className='mt-1'/> */}
+                            </div>
+
+                        </div>
+                        <div className="row">
+                            {sortby &&
+                                sortedpost.map((post) => {
+                                    return (
+                                        <div className="col-md-4 p-2" key={post.id}>
+                                            <div className="card">
+                                                <Link href='/[slug]' as={`/${post.slug}`}><a className='text-decoration-none card-header text-body'><h6 >{post.title.rendered}</h6></a></Link>
+                                                <div className="card-body p-0">
+                                                    <img src={post.better_featured_image.source_url} className="card-img-top" alt={post.better_featured_image.alt_text} />
+                                                    <p className="card-text my-1 p-2 text-justify pro_desc">{post.acf.description}</p>
+                                                    <div className='card-footer p-2'>
+                                                        <p className='font-weight-bold text-secondary'>Price : ${post.acf.price} </p>
+                                                        <div className=''>
+                                                            <a className='border_none font-weight-bold btn-sm btn btn-warning text-uppercase text-white' href={post.acf.aliexpress_link} target='blank'>Amazone</a>
+                                                            <a className='border_none font-weight-bold btn-sm btn btn-warning text-uppercase text-white ml-3' href={post.acf.amazon_link} target='blank'>Ali Express</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    )
+                                })
+                            }
+                            {!sortby &&
+                                catagorypost.map((post) => {
+                                    return (
+                                        <div className="col-md-4 p-2" key={post.id}>
+                                            <div className="card">
+                                                <Link href='/[slug]' as={`/${post.slug}`}><a className='text-decoration-none card-header text-body'><h6 >{post.title.rendered}</h6></a></Link>
+                                                <div className="card-body p-0">
+                                                    <img src={post.better_featured_image.source_url} className="card-img-top" alt={post.better_featured_image.alt_text} />
+                                                    <p className="card-text my-1 p-2 text-justify pro_desc">{post.acf.description}</p>
+                                                    <div className='card-footer p-2'>
+                                                        <p className='font-weight-bold text-secondary'>Price : ${post.acf.price} </p>
+                                                        <div className=''>
+                                                            <a className='border_none font-weight-bold btn-sm btn btn-warning text-uppercase text-white' href={post.acf.aliexpress_link} target='blank'>Amazone</a>
+                                                            <a className='border_none font-weight-bold btn-sm btn btn-warning text-uppercase text-white ml-3' href={post.acf.amazon_link} target='blank'>Ali Express</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    )
+                                })
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </Layout>
+    );
+};
+// For Get catagory
+export async function getCatagory() {
+    const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/categories')
+    const data = await res.json()
+    return data
+}
+
+
+export async function getStaticProps(context) {
+
+
+
+    // const myslug = context.params.slug
+    const allcatagory = await getCatagory()
+    const findid = await allcatagory.find(({ slug }) => slug === context.params.slug)
+    const myid = await findid.id
+    const res = await fetch(`http://kidsrctoys.com/admin/wp-json/wp/v2/posts?categories=${myid}`)
+    const catagorypost = await res.json()
+
+
+
+    return {
+        props: { allcatagory, catagorypost }
+    }
+}
+
+export async function getStaticPaths() {
+    const posts = await getCatagory()
+    const paths = posts.map(post => ({ params: { slug: post.slug } }))
+
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+
+
+
+export default Product;

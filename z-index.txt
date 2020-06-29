@@ -1,0 +1,10 @@
+1. Banner top
+2. Menu
+    - all page
+    - All Menu  
+    - catagory
+3. Menu Routing
+4. Single page
+5. Catagory page
+6. Searching 
+7. Filtaring

@@ -1,0 +1,23 @@
+
+.banner_photo img{
+    width: 100%;
+    height: auto;
+  }
+  .pro_desc{
+    font-size: .9rem;
+  }
+  .border_none {
+    border: none;
+  }
+  /* Single post  */
+  .post_title {
+    font-family: 'Piedra', cursive;
+    color: gray;
+  }
+  .hover-color li a:hover {
+    color: orange;
+  }
+
+  .post_banner_img{
+    width: 100%;
+  }
