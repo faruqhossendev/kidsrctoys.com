@@ -78,14 +78,14 @@ const Post = ({ post, postadds }) => {
 
 // For All post
 export async function getPost() {
-    const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/posts')
+    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/posts')
     const data = await res.json()
     return data
 }
 
 // For Adds 
 export async function getAdds() {
-    const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/adds_post')
+    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/adds_post')
     const adds = await res.json()
     return adds
 }

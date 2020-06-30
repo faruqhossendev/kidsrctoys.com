@@ -18,6 +18,7 @@ const Home = ({ posts }) => {
         <div className="row">
           {
             posts.map(products => {
+              console.log('index js', products)
               return (
                 <div className="col-md-4 p-2" key={products.id}>
                   <div className="card">
@@ -44,7 +45,7 @@ const Home = ({ posts }) => {
   )
 }
 export async function getStaticProps(context) {
-  const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/posts')
+  const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/posts')
    const posts = await res.json()
 
   return {

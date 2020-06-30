@@ -74,7 +74,7 @@ const Product = ({ allcatagory, catagorypost }) => {
 };
 // For Get catagory
 export async function getCatagory() {
-    const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/categories')
+    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/categories')
     const data = await res.json()
     return data
 }

@@ -6,7 +6,7 @@ const Banner = () => {
 
     const [banners, setBanners] = useState([])
     useEffect(() => {
-        Axios.get('https://kidsrctoys.com/admin/wp-json/wp/v2/adds_header')
+        Axios.get('http://admin.kidsrctoys.com/wp-json/wp/v2/adds_header')
             .then((ban) => {
                 setBanners(ban.data)
             })

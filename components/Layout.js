@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 
     // For Search Product
     useEffect(() => {
-        const postURL = 'https://kidsrctoys.com/admin/wp-json/wp/v2/posts'
+        const postURL = 'http://admin.kidsrctoys.com/wp-json/wp/v2/posts'
         {
             keyword &&
                 Axios.get(postURL)

@@ -16,7 +16,7 @@ const Page = ({ page }) => {
 
 // For All page
 export async function getPost() {
-    const res = await fetch('https://kidsrctoys.com/admin/wp-json/wp/v2/pages')
+    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/pages')
     const data = await res.json()
     return data
 }

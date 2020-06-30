@@ -9,7 +9,7 @@ const Footer = () => {
 
 
     useEffect(() => {
-        const pageURL = 'https://kidsrctoys.com/admin/wp-json/wp/v2/pages'
+        const pageURL = 'http://admin.kidsrctoys.com/wp-json/wp/v2/pages'
         Axios.get(pageURL)
             .then((res) => {
                 setPages(res.data)

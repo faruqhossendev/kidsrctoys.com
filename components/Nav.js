@@ -11,7 +11,7 @@ const Nav = ({keyword, keywordChangeHandlar}) => {
 
 
     useEffect(() => {
-        const menuURL = 'https://kidsrctoys.com/admin/wp-json/menus/v1/menus/mainMenu'
+        const menuURL = 'http://admin.kidsrctoys.com/wp-json/menus/v1/menus/mainMenu'
         Axios.get(menuURL)
             .then(res => {
                 setMenus(res.data.items)
@@ -20,7 +20,7 @@ const Nav = ({keyword, keywordChangeHandlar}) => {
     }, [])
 
     useEffect(() => {
-        const catatoryURL = 'https://kidsrctoys.com/admin/wp-json/wp/v2/categories'
+        const catatoryURL = 'http://admin.kidsrctoys.com/wp-json/wp/v2/categories'
         Axios.get(catatoryURL)
             .then((res) => {
                 setCatagorys(res.data)
@@ -29,7 +29,7 @@ const Nav = ({keyword, keywordChangeHandlar}) => {
 
     }, [])
     useEffect(() => {
-        const pageURL = 'https://kidsrctoys.com/admin/wp-json/wp/v2/pages'
+        const pageURL = 'http://admin.kidsrctoys.com/wp-json/wp/v2/pages'
         Axios.get(pageURL)
             .then((res) => {
                 setPages(res.data)
