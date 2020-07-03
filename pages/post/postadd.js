@@ -18,13 +18,13 @@ const postadd = ({posts}) => {
 };
 
 export async function getPost() {
-    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/posts')
+    const res = await fetch('http://hometoos.com/kidsrctoys/wp-json/wp/v2/posts')
     const data = await res.json()
     return data
 }
 
 export async function getStaticProps(context) {
-    const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/adds_post')
+    const res = await fetch('http://hometoos.com/kidsrctoys/wp-json/wp/v2/adds_post')
      const posts = await res.json()
 
      const some = await getPost()

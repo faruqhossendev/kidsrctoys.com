@@ -7,7 +7,7 @@ const Test = () => {
 
     // For Search Product
     useEffect(() => {
-        const postURL = 'http://admin.kidsrctoys.com/wp-json/wp/v2/posts'
+        const postURL = 'http://hometoos.com/kidsrctoys/wp-json/wp/v2/posts'
         {
             Axios.get(postURL)
                 .then(posts => {

@@ -45,7 +45,7 @@ const Home = ({ posts }) => {
   )
 }
 export async function getStaticProps(context) {
-  const res = await fetch('http://admin.kidsrctoys.com/wp-json/wp/v2/posts')
+  const res = await fetch('http://hometoos.com/kidsrctoys/wp-json/wp/v2/posts')
    const posts = await res.json()
 
   return {
