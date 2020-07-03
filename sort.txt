@@ -144,7 +144,7 @@ export async function getStaticProps(context) {
     const allcatagory = await getCatagory()
     const findid = await allcatagory.find(({ slug }) => slug === context.params.slug)
     const myid = await findid.id
-    const res = await fetch(`http://kidsrctoys.com/admin/wp-json/wp/v2/posts?categories=${myid}`)
+    const res = await fetch(`http://hometoos.com/kidsrctoys/wp-json/wp/v2/posts?categories=${myid}`)
     const catagorypost = await res.json()
 
 

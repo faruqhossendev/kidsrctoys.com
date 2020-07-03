@@ -13,7 +13,7 @@ const Post = ({ post, postadds }) => {
     console.log('all post ', relatedpost)
 
     useEffect(() => {
-        const catagorypostURL = `http://kidsrctoys.com/admin/wp-json/wp/v2/posts?categories=${post.categories[0]}`
+        const catagorypostURL = `http://hometoos.com/kidsrctoys/wp-json/wp/v2/posts?categories=${post.categories[0]}`
         Axios.get(catagorypostURL)
             .then((allpost) => {
                 setRelatedpost(allpost.data)
